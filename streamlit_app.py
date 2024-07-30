@@ -18,6 +18,7 @@ st.dataframe(data=my_dataframe, use_container_width=True)
 ingredients_list = st.multiselect(
     'Choose upto 5 ingredients:'
     ,my_dataframe
+    ,max_selections=5
     )
 
 if ingredients_list:    
@@ -28,10 +29,10 @@ if ingredients_list:
 
     #st.write(ingredients_string)
 
-    my_insert_stmt = """ insert into smoothies.public.orders(ingredients)
-            values ('""" + ingredients_string + """')"""
+    my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
+            values ('""" + ingredients_string + """','"""+name_on_order+ """')"""
 
-    #st.wri_te(my_insert_stmt)
+    st.write(my_insert_stmt)
     time_to_insert = st.button('Submit Order')
 
     if time_to_insert:
